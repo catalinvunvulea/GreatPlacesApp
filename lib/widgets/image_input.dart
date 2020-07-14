@@ -28,6 +28,9 @@ class _ImageInputState extends State<ImageInput> {
     source: ImageSource.camera,
     maxWidth: 600,
   );
+  if (imageFile == null) { //as the image file will return null if we open the camer and don't take a picture, we need to stop the code here
+    return;
+  }
  setState(() {
    _storedImage = File(imageFile.path); //File(x.path) converts the picked file to a regular file
  });
