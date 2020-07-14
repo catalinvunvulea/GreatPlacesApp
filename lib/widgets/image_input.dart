@@ -13,7 +13,7 @@ class ImageInput extends StatefulWidget {
 Future<void> _takePicture() async {
   final picker =
       ImagePicker(); // Provides an easy way to pick an image/video from the image library or take a picture/vide with the camera
-  final imageFile = await picker.getImage(
+  final imageFile = await picker.getImage( //the palce when the picture will be stored once taken
     source: ImageSource.camera,
     maxWidth: 600,
   );
