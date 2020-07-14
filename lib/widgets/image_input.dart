@@ -7,7 +7,10 @@ import 'package:path_provider/path_provider.dart' as sysPath;
 
 
 class ImageInput extends StatefulWidget {
-  ImageInput({Key key}) : super(key: key);
+  
+  final Function onSelectImage;
+
+  ImageInput(this.onSelectImage);
 
   @override
   _ImageInputState createState() => _ImageInputState();
@@ -31,7 +34,7 @@ class _ImageInputState extends State<ImageInput> {
   final appDirectory = await sysPath.getApplicationDocumentsDirectory(); //we set the path where the data should be saved
   final fileName = path.basename(imageFile.path); //we store the name of the picture,
   final savedImage = await File(imageFile.path).copy('${appDirectory.path}/$fileName'); //we copy the file (image in our case) on the device, first the location ${} and then name /$
-
+  widget.onSelectImage(savedImage);
 }
 
 
