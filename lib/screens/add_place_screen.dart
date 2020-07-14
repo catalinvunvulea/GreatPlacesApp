@@ -1,5 +1,7 @@
-import 'package:GreatPlacesApp/widgets/image_input.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/image_input.dart';
+
 
 class AddPlaceScreen extends StatefulWidget {
   AddPlaceScreen({Key key}) : super(key: key);
