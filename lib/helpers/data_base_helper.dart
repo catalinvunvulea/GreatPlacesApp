@@ -1,11 +1,12 @@
 import 'package:sqflite/sqflite.dart' as sql;
+import 'package:sqflite/sqlite_api.dart';
 import 'package:path/path.dart' as path;
 
 class DataBaseHelper {
-  static Future<void> insert(String table, Map<String, Object> data) async {
+  static Future<Database> dataBase() async {
     final dbPath = await sql
         .getDatabasesPath(); //the path where you may store you data (folder)
-    final sqlDB = await sql.openDatabase(
+    return sql.openDatabase(
       //opens or creates (if it doesn't exist yet)
       path.join(dbPath, 'places.db'),
       onCreate: (db, version) {
@@ -16,10 +17,20 @@ class DataBaseHelper {
       },
       version: 1, //we work with 1 version
     );
-    await sqlDB.insert(
+  }
+
+  static Future<void> insert(String table, Map<String, Object> data) async {
+    final db = await DataBaseHelper.dataBase();
+    db.insert(
       table,
       data,
-      conflictAlgorithm: sql.ConflictAlgorithm.replace,//if we try to insert data that already exist, we will replace the old one
+      conflictAlgorithm: sql.ConflictAlgorithm
+          .replace, //if we try to insert data that already exist, we will replace the old one
     );
+  }
+
+  static Future<List<Map<String, dynamic>>> getData(String table) async {
+    final db = await DataBaseHelper.dataBase();
+    return db.query(table); //get data, returt a list of maps
   }
 }
