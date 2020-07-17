@@ -25,9 +25,13 @@
 	<key>NSCameraUsageDescription</key>
 	<string>We need to take a picture!</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>To enable sound on videa, we need access to microphone</string>
+	<string>To enable sound on video, we need access to microphone</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We need to take a picture!</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to run this app</key>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Location is needed only when running this app</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
