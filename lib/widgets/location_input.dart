@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:location/location.dart';
+
+import '../helpers/location_helper.dart';
 
 class LocationInput extends StatefulWidget {
   LocationInput({Key key}) : super(key: key);
@@ -13,12 +14,16 @@ class _LocationInputState extends State<LocationInput> {
   String _previewImageUrl;
 
   Future<void> _getCurrentUserLocation() async {
-    final locData = await Location().getLocation(); // wetching the user coordonates; can use this by installing location
-    print(locData.latitude);
-    print(locData.longitude);
-    print(locData);
+    final locData = await Location()
+        .getLocation(); // wetching the user coordonates; can use this by installing location
+    final staticMapImageUrl = LocationHelper.generateLocationPreviewImage(
+      latitude: locData.latitude,
+      longitude: locData.longitude,
+    ); //passing the user coordinate to the googlemaps API
 
-
+    setState(() {
+      _previewImageUrl = staticMapImageUrl;
+    });
   }
 
   @override
