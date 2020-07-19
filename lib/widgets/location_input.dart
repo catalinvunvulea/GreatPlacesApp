@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../helpers/location_helper.dart';
 import '../screens/map_screen.dart';
@@ -28,7 +29,7 @@ class _LocationInputState extends State<LocationInput> {
   }
 
   Future<void> _selectOnMap() async {
-    final selectedLocation = await Navigator.of(context).push(
+    final  selectedLocation = await Navigator.of(context).push<LatLng>(//.push<LatLng> this tells us that once the pushed screen is dimissed, we should get back a LatLng
       MaterialPageRoute(
         fullscreenDialog: true, //to have a slightly different look when loading the page, and instead of back button will have an x in the bar
         builder: (ctx) => MapScreen(
@@ -40,6 +41,7 @@ class _LocationInputState extends State<LocationInput> {
     if (selectedLocation == null) {
       return;
     }
+    print(selectedLocation);
     //....
   }
 
