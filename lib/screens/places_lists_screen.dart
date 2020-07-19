@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'add_place_screen.dart';
 import '../providers/great_places.dart';
+import '../screens/place_detail_screen.dart';
 
 class PlacesListScreen extends StatelessWidget {
   const PlacesListScreen({Key key}) : super(key: key);
@@ -21,8 +22,11 @@ class PlacesListScreen extends StatelessWidget {
             )
           ],
         ),
-        body: FutureBuilder(//future builder, as we will build the screen only once the data (snapshot) is returned (provide..setAndFetchPlaces(),)
-          future: Provider.of<GreatPlaces>(context, listen: false)//listen false as we don't wish to rebuilt the full app
+        body: FutureBuilder(
+          //future builder, as we will build the screen only once the data (snapshot) is returned (provide..setAndFetchPlaces(),)
+          future: Provider.of<GreatPlaces>(context,
+                  listen:
+                      false) //listen false as we don't wish to rebuilt the full app
               .fetchAndSetPlaces(),
           builder: (ctx, snapshot) => snapshot.connectionState ==
                   ConnectionState.waiting
@@ -46,9 +50,12 @@ class PlacesListScreen extends StatelessWidget {
                               ),
                             ),
                             title: Text('${greatPlaces.items[index].title}'),
-                            subtitle: Text('${greatPlaces.items[index].location.address}'),
+                            subtitle: Text(
+                                '${greatPlaces.items[index].location.address}'),
                             onTap: () {
-                              //GO TO DETAIL PAGE
+                              Navigator.of(context).pushNamed(
+                                  PlaceDetailScreen.routeName,
+                                  arguments: greatPlaces.items[index].id);
                             },
                           ),
                         ),

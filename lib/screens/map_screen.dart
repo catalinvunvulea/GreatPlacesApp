@@ -55,14 +55,15 @@ class _MapScreenState extends State<MapScreen> {
           zoom: 16,
         ),
         onTap: widget.isSelecting ? _selectLocation : null,
-        markers: _pickedLocation ==
-                null //markers returns a SET = similar to Map?dicitonary withouth a key, so like an array but won't add the same value twice (can't have duplications)
+        markers: (_pickedLocation == null &&
+                widget.isSelecting) //markers returns a SET = similar to Map?dicitonary withouth a key, so like an array but won't add the same value twice (can't have duplications)
             ? null
             : {
                 Marker(
-                    // is a maker on the map
-                    markerId: MarkerId('m1'),
-                    position: _pickedLocation),
+                  // is a maker on the map
+                  markerId: MarkerId('m1'),
+                  position: _pickedLocation ?? LatLng(widget.initialLocation.latitute, widget.initialLocation.longitude), // ?? = if null, then what is after ??
+                ),
               },
       ),
     );
