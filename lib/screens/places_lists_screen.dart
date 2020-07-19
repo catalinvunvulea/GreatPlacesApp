@@ -23,7 +23,7 @@ class PlacesListScreen extends StatelessWidget {
         ),
         body: FutureBuilder(//future builder, as we will build the screen only once the data (snapshot) is returned (provide..setAndFetchPlaces(),)
           future: Provider.of<GreatPlaces>(context, listen: false)//listen false as we don't wish to rebuilt the full app
-              .setAndFetchPlaces(),
+              .fetchAndSetPlaces(),
           builder: (ctx, snapshot) => snapshot.connectionState ==
                   ConnectionState.waiting
               ? Center(
@@ -46,6 +46,7 @@ class PlacesListScreen extends StatelessWidget {
                               ),
                             ),
                             title: Text('${greatPlaces.items[index].title}'),
+                            subtitle: Text('${greatPlaces.items[index].location.address}'),
                             onTap: () {
                               //GO TO DETAIL PAGE
                             },

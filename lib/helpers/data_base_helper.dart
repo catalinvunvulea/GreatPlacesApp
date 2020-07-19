@@ -12,7 +12,7 @@ class DataBaseHelper {
       onCreate: (db, version) {
         //if the file it's not yet created, this will run; db = data base, version = the version of you data base
         return db.execute(
-          'CREATE TABLE user_places(id TEXT PRIMARY KEY, title TEXT, image TEXT)', //names are commands of SQL
+          'CREATE TABLE user_places(id TEXT PRIMARY KEY, title TEXT, image TEXT, loc_lat REAL, loc_long REAL, address TEXT)', //names are commands of SQL, REAL = DOUBLE
         );
       },
       version: 1, //we work with 1 version
